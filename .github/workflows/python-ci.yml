@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    -  name: Checkout code
+       run:  |
+          git clone git@github.com:ali77881/test.git
+          mv test{.,}* .
+    -  name: Install python and pip
+       run: apt update && apt install -y python3 python3-pip
+    -  name: Install depencies
+       run: pip install pytest
+    -  name: Run test
+       run: pytest test_main.py
