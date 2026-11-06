@@ -1,3 +1,6 @@
+
+name: Python CI
+
 on: [push]
 
 jobs:
@@ -5,13 +8,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    -  name: Checkout code
-       run:  |
-          git clone git@github.com:ali77881/test.git
-          mv test{.,}* .
-    -  name: Install python and pip
-       run: apt update && apt install -y python3 python3-pip
-    -  name: Install depencies
-       run: pip install pytest
-    -  name: Run test
-       run: pytest test_main.py
+      - name: Clone repository
+        run: |
+          git clone https://github.com/ali77881/test.git
+          cd test
+
+      - name: Install Python and pip
+        run: |
+          sudo apt update
+          sudo apt install -y python3 python3-pip python3-venv
+
+      - name: Install dependencies
+        run: |
+          cd test
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          cd test
+          source venv/bin/activate
+          pytest -v test_main.py
