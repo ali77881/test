@@ -20,3 +20,15 @@ jobs:
 
       - name: Run tests
         run: pytest -v test_main.py
+
+
+  system-info:
+    name: Check System Information
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show system information
+        run: |
+          uname -a
+          python3 --version
+          pip3 --version
