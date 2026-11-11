@@ -30,13 +30,33 @@ jobs:
         run: pytest -v test_main.py
 
 
-  system-info:
-    name: Check System Information
+  build:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show system information
-        run: |
-          uname -a
-          python3 --version
-          pip3 --version
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: install Python and pip
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install pyinstaller
+
+      - name: Build for x86_64
+        run: pyinstaller --onefile --distpath dist_x86_64 --target-architecture x86_64 --name python_hello_world_x86_64.out
+
+      - name: Build for arm64
+        run: pyinstaller --onefile --distpath dist_arm64 --target-architecture arm64  --name python_hello_world_app_arm.out main.py
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python_hello_world_linux_builds
+          path: |
+            dist_x86_64/python_hello_world_x86_64.out
+            dist_arm64/python_hello_world_app_arm.out
+        retention-days: 90
