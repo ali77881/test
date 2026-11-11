@@ -59,4 +59,4 @@ jobs:
           path: |
             dist_x86_64/python_hello_world_x86_64.out
             dist_arm64/python_hello_world_app_arm.out
-        retention-days: 90
+          retention-days: 90
