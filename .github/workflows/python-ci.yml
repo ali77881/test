@@ -47,7 +47,7 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build for x86_64
-        run: pyinstaller --onefile --distpath dist_x86_64 --target-architecture x86_64 --name python_hello_world_x86_64.out
+        run: pyinstaller --onefile --distpath dist_x86_64 --target-architecture x86_64 --name python_hello_world_x86_64.out main.py
 
       - name: Build for arm64
         run: pyinstaller --onefile --distpath dist_arm64 --target-architecture arm64  --name python_hello_world_app_arm.out main.py
