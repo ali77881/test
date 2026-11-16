@@ -1,4 +1,10 @@
-from main import say_hello
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
 
 def test_say_hello():
-    assert say_hello() == "Hello,World!"
+    """Test the / endpoint returns the expected greeting."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello, World!"}
