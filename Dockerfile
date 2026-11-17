@@ -1,9 +1,10 @@
 FROM python:3.13-slim
 
-COPY main.py .
+COPY requirements.txt . 
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir fastapi uvicorn
+COPY app.py .
 
-EXPOSE 8000
+EXPOSE 5000
 
-CMD ["python", "main.py"]
+CMD ["python", "app.py"]
