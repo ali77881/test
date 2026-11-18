@@ -1,0 +1,25 @@
+
+name: Test Self Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    runs-on: [self-hosted, linux, x64, kuber7]
+
+    steps:
+      - name: Check Hostname
+        run: hostname
+
+      - name: Check User
+        run: whoami
+
+      - name: Check Docker
+        run: docker --version
+
+      - name: Check Containers
+        run: docker ps
+
+      - name: Check Directory
+        run: pwd
