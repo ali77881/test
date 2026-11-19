@@ -22,15 +22,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build image
-        run: docker build -t myapp:latest .
+        run: docker build -t hello-app:v1 .
 
       - name: Remove old container
-        run: docker rm -f myapp || true
+        run: docker rm -f hello-app || true
 
       - name: Run new container
         run: |
           docker run -d \
-            --name myapp \
+            --name hello-app \
             --restart unless-stopped \
             -p 5000:5000 \
             myapp:latest
