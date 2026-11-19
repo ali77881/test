@@ -33,7 +33,7 @@ jobs:
             --name hello-app \
             --restart unless-stopped \
             -p 5000:5000 \
-            myapp:latest
+            hello-app:v1
 
       - name: Cleanup old images
         run: docker image prune -f
