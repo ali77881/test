@@ -5,4 +5,4 @@ def test_home():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.data.decode() == "good by"
+    assert response.data.decode() == "The project is finished"
